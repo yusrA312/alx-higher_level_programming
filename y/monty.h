@@ -6,7 +6,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <ctype.h>
-#include <stddef.h>
 
 extern int glo;
 /*--- Struct Definitions ---*/

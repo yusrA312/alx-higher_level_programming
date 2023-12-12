@@ -48,19 +48,21 @@ void pu_sh(stack_t **stack, unsigned int line)
  */
 int itnum(char *str)
 {
-	unsigned int x;
+	unsigned int i;
 
 	if (str == NULL)
 		return (0);
-
-	for (x = 0; str; x++)
+	i = 0;
+	while (str[i])
 	{
 		if (str[0] == '-')
 		{
+			i++;
 			continue;
 		}
-		if (!isdigit(str[x]))
+		if (!isdigit(str[i]))
 			return (0);
+		i++;
 	}
 	return (1);
 }
