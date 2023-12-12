@@ -57,7 +57,7 @@ void divint(stack_t **stack, unsigned int line);
 void ps_tr(stack_t **stack, unsigned int line);
 void modint(stack_t **stack, unsigned int line);
 void ro_tl(stack_t **stack, unsigned int line);
-void ro_tr(stack_t **stack, unsigned int line);
+void ro_tr(stack_t **head, unsigned int counter);
 void que_ue(stack_t **stack, unsigned int line);
 void sta_ck(stack_t **stack, unsigned int line);
 stack_t *endadd(stack_t **head, const int n);
@@ -68,4 +68,5 @@ void err(stack_t **stack);
 int itnum(char *str);
 int _strcmp(char *s1, char *s2);
 int _putchar(char c);
+void ro_tl(stack_t **head,  __attribute__((unused)) unsigned int counter);
 #endif
