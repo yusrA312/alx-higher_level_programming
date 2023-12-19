@@ -7,14 +7,14 @@ class Square:
 
     def __init__(self, size=0):
         """Initialize a new square.
-            size (int): The size of the new square.
+        size (int): The size of the new square.
         """
         self.size = size
 
     @property
     def size(self):
         """Get/set the current size"""
-        return (self.__size)
+        return self.__size
 
     @size.setter
     def size(self, value):
@@ -26,7 +26,7 @@ class Square:
 
     def area(self):
         """Return the current area"""
-        return (self.__size**2)
+        return self.__size**2
 
     def my_print(self):
         """Print the square with the #"""

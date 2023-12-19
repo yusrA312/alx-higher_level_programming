@@ -5,7 +5,7 @@
 class Square:
     """Represent a square."""
 
-    def __init__(self, size=0, position=(0, 0)):
+    def _init_(self, size=0, position=(0, 0)):
         """Initialize a new square.
         Args:
             size (int): The size
@@ -45,7 +45,7 @@ class Square:
 
     def area(self):
         """Return the current area"""
-        return self.__size * self.__size
+        return self._size * self._size
 
     def my_print(self):
         """Print the square with the #"""
@@ -58,3 +58,14 @@ class Square:
             [print(" ", end="") for j in range(0, self.__position[0])]
             [print("#", end="") for k in range(0, self.__size)]
             print("")
+
+    def _str_(self):
+        """Define the print()"""
+        if self.__size != 0:
+            [print("") for i in range(0, self.__position[1])]
+        for i in range(0, self.__size):
+            [print(" ", end="") for j in range(0, self.__position[0])]
+            [print("#", end="") for k in range(0, self.__size)]
+            if i != self.__size - 1:
+                print("")
+        return ""
