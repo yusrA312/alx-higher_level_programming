@@ -3,7 +3,7 @@
 
 
 def add_attribute(obj, att, value):
-    """ If possible add a new attribute to an object.
+    """If possible add a new attribute to an object.
     Args:
         obj (any): The object to add an attribute to.
         att (str): The name of the attribute to add to obj.

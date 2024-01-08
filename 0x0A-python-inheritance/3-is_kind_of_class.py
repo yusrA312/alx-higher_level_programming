@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-'''Module for is_kind_of_class method.'''
+"""Module for is_kind_of_class method."""
 
 
 def is_kind_of_class(obj, a_class):
-    '''is it  an object is a subclass of a class.'''
+    """is it  an object is a subclass of a class."""
     return isinstance(obj, a_class)
