@@ -1,30 +1,140 @@
-Test for 1-my_list.py
--------------------------------------------
+The ``1-my_list`` module
+============================
+
+Using ``1-mylist``
+---------------------
+
+Import function from module:
+    >>> MyList = __import__('1-my_list').MyList
+
+Correct Class Type test:
+    >>> mylist = MyList()
+    >>> type(mylist) == MyList
+    True
+
+Correct Instance test:
+    >>> mylist = MyList()
+    >>> isinstance(mylist, list)
+    True
+
+print_sorted method is an instance method:
+    >>> type(MyList.__dict__['print_sorted'])
+    <class 'function'>
+
+print_sorted method called via class with no args:
+    >>> mylist.__class__.print_sorted()
+    Traceback (most recent call last):
+    TypeError: print_sorted() missing 1 required positional argument: 'self'
+
+print_sorted method called with 1 arg:
+    >>> mylist.print_sorted([4, 2, 5])
+    Traceback (most recent call last):
+    TypeError: print_sorted() takes 1 positional argument but 2 were given
+
+print_sorted method called with 2 args:
+    >>> mylist.print_sorted([4, 2, 5], 1)
+    Traceback (most recent call last):
+    TypeError: print_sorted() takes 1 positional argument but 3 were given
+
+Empty list test:
+    >>> mylist = MyList()
+    >>> mylist.print_sorted()
+    []
+
+Normal list test:
+    >>> mylist = MyList([20, 1000, 10])
+    >>> mylist.print_sorted()
+    [10, 20, 1000]
+
+Normal list test 2:
+    >>> mylist = MyList([1, 4, 2, 3, 5])
+    >>> mylist.print_sorted()
+    [1, 2, 3, 4, 5]
+
+Negative ints list test:
+    >>> mylist = MyList([-1000, -98, -232565, 0, -234234, -123])
+    >>> mylist.print_sorted()
+    [-234234, -232565, -1000, -123, -98, 0]
+
+Original list unchanged:
+    >>> mylist = MyList([2, 10, 1, -10, 20, 100, 0])
+    >>> mylist.print_sorted()
+    [-10, 0, 1, 2, 10, 20, 100]
+    >>> mylist
+    [2, 10, 1, -10, 20, 100, 0]
+
+List already in order:
+    >>> mylist = MyList([-100, 0, 1, 2, 10, 100])
+    >>> mylist.print_sorted()
+    [-100, 0, 1, 2, 10, 100]
+
+Test append:
+    >>> mylist = MyList()
+    >>> mylist.append(100)
+    >>> mylist
+    [100]
 
 case 0: import
->>> MyList = __import__('1-my_list').MyList
 >>>
 -------------------------------------------
 
 case 1: common case
 
->>> my_list = MyList()
->>> my_list.append(1)
->>> my_list.append(4)
->>> my_list.append(2)
->>> my_list.append(3)
->>> my_list.append(5)
->>> print(my_list)
-[1, 4, 2, 3, 5]
->>> my_list.print_sorted()
-[1, 2, 3, 4, 5]
->>> print(my_list)
-[1, 4, 2, 3, 5]
+>>> mylist.append(1)
+>>> mylist.append(4)
+>>> mylist.append(2)
+>>> mylist.append(3)
+>>> mylist.append(5)
+>>> print(mylist)
+[100, 1, 4, 2, 3, 5]
+>>> mylist.print_sorted()
+[1, 2, 3, 4, 5, 100]
+>>> print(mylist)
+[100, 1, 4, 2, 3, 5]
+
+case: negative numbers
+
+>>> mylist.append(50)
+>>> mylist.append(10)
+>>> mylist.append(-1)
+>>> mylist.append(515)
+>>> mylist.append(-5)
+>>> mylist.print_sorted()
+[-5, -1, 1, 2, 3, 4, 5, 10, 50, 100, 515]
 >>>
 
--------------------------------------------
+case: passed a list
 
-case 2: not defined object
+>>> a = [10, 90, 44]
+>>> mylist = MyList(a)
+>>> mylist.print_sorted()
+[10, 44, 90]
+>>>
+case 4: empty list
+
+>>> x = []
+>>> mylist = MyList(x)
+>>> mylist.print_sorted()
+[]
+>>>
+case: same number
+
+>>> mylist2 = MyList()
+>>> mylist2.append(10)
+>>> mylist2.append(10)
+>>> mylist2.append(10)
+>>> mylist2.append(10)
+>>> mylist2.print_sorted()
+[10, 10, 10, 10]
+>>>
+case: parent object
+>>> mylist = [10, 20, 30]
+>>> mylist.print_sorted()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'print_sorted'
+>>>
+case: not defined object
 
 >>> MyList = __import__('1-my_list').MyList
 >>> my_list2.print_sorted()
@@ -32,74 +142,3 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 NameError: name 'my_list2' is not defined
 >>>
-
--------------------------------------------
-
-case 3: passed a list
-
->>> a = [1, 9, 4]
->>> my_list = MyList(a)
->>> my_list.print_sorted()
-[1, 4, 9]
->>>
-
--------------------------------------------
-
-case 4: empty list
-
->>> a = []
->>> my_list = MyList(a)
->>> my_list.print_sorted()
-[]
->>>
-
--------------------------------------------
-
-case 5: unique number
-
->>> my_list = MyList()
->>> my_list.append(1)
->>> my_list.print_sorted()
-[1]
->>> print(my_list)
-[1]
->>>
-
--------------------------------------------
-
-case 6: same number
-
->>> my_list2 = MyList()
->>> my_list2.append(1)
->>> my_list2.append(1)
->>> my_list2.append(1)
->>> my_list2.append(1)
->>> my_list2.print_sorted()
-[1, 1, 1, 1]
->>>
-
--------------------------------------------
-
-case 7: parent object
->>> my_list = [1, 2, 3]
->>> my_list.print_sorted()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-AttributeError: 'list' object has no attribute 'print_sorted'
->>>
-
--------------------------------------------
-
-case 8: negative numbers
-
->>> MyList = __import__('1-my_list').MyList
->>> my_list = MyList()
->>> my_list.append(5)
->>> my_list.append(1)
->>> my_list.append(-1)
->>> my_list.append(51)
->>> my_list.append(-5)
->>> my_list.print_sorted()
-[-5, -1, 1, 5, 51]
->>>
-
