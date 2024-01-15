@@ -60,8 +60,8 @@ class Base:
         file = "{}.json".format(cls.__name__)
         if not path.isfile(file):
             return []
-        with open(file, "r", encoding="utf-8") as fload:
-            return [cls.create(**d) for d in cls.from_json_string(fload.read())]
+        with open(file, "r", encoding="utf-8") as flad:
+            return [cls.create(**d) for d in cls.from_json_string(flad.read())]
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
@@ -71,11 +71,9 @@ class Base:
 
         if list_objs is not None:
             if cls is Rectangle:
-                list_objs = [
-                    [oX.id, oX.width, oX.height, oX.x, oX.y] for oX in list_objs
-                ]
+                list_objs = [[X.id, X.width, X.height, X.x, X.y] for X in list_objs]
             else:
-                list_objs = [[oX.id, oX.size, oX.x, oX.y] for oX in list_objs]
+                list_objs = [[X.id, X.size, X.x, X.y] for X in list_objs]
         with open(
             "{}.csv".format(cls.__name__), "w", newline="", encoding="utf-8"
         ) as fsave:
