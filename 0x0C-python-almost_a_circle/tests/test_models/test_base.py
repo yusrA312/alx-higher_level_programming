@@ -1,13 +1,72 @@
 #!/usr/bin/python3
-'''Module for Base unit tests.'''
+'''Module Base'''
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
 
 class TestBase(unittest.TestCase):
+    def test_instantiation(self):
+
+        with self.assertRaises(ValueError) as e:
+            m = Square(-71)
+        msg = "width must be > 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            m = Square(16, -662)
+        msg = "x must be >= 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            m = Square(1, 23, -83)
+        msg = "y must be >= 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            m = Square(0)
+        msg = "width must be > 0"
+        self.assertEqual(str(e.exception), msg)
+
+    def test_no_arg(self):
+        m = Base()
+        b = Base()
+        self.assertEqual(m.id, b.id - 1)
+
+    def test_three_bases(self):
+        m = Base()
+        n = Base()
+        r = Base()
+        self.assertEqual(m.id, n.id - 1)
+
+    def test_None_id(self):
+        m = Base(None)
+        b = Base(None)
+        self.assertEqual(m.id, b.id - 1)
+
+    def test_unique_id(self):
+        self.assertEqual(11, Base(11).id)
+
+    def test_nb_instances(self):
+        m = Base()
+        n = Base(11)
+        r = Base()
+        self.assertEqual(m.id, n.id - 4)
+
+    def test_class(self):
+        self.assertEqual(str(Square),
+                         "<class 'models.square.Square'>")
+
+    def test_inheritance(self):
+        self.assertTrue(issubclass(Square, Base))
+
+    def test_constructor(self):
+        with self.assertRaises(TypeError) as e:
+            m = Square()
+        n = "__init__() missing 1 required positional argument: 'size'"
+        self.assertEqual(str(e.exception), n)
+
     def test_from_json_string_l(self):
-        '''Tests to_json_string() signature:'''
         with self.assertRaises(TypeError) as m:
             Base.from_json_string()
         n = "from_json_string() missing 1 required positional argument: \
@@ -31,13 +90,13 @@ class TestBase(unittest.TestCase):
         list_out = Rectangle.from_json_string(json_list_in)
         self.assertEqual(list, type(list_out))
 
-    def test_from_json_string_one_rectangle(self):
+    def test_from_json_string_o(self):
         list_in = [{"id": 80, "width": 20, "height": 74, "x": 97}]
         json_list_in = Rectangle.to_json_string(list_in)
         list_out = Rectangle.from_json_string(json_list_in)
         self.assertEqual(list_in, list_out)
 
-    def test_from_json_string_two_rectangles(self):
+    def test_from_json_string_two(self):
         list_in = [
             {"id": 80, "width": 20, "height": 74, "x": 97, "y": 88},
             {"id": 80, "width": 57, "height": 62, "x": 51, "y": 33},
@@ -68,7 +127,7 @@ class TestBase(unittest.TestCase):
         Rectangle.save_to_file([m, m1])
 
         with open("Rectangle.json", "r") as f:
-            self.assertEqual(len(f.read()), 105)
+            self.assertEqual(len(f.read()), 107)
 
         Rectangle.save_to_file(None)
         with open("Rectangle.json", "r") as f:
@@ -81,3 +140,7 @@ class TestBase(unittest.TestCase):
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), "[]")
+
+
+if __name__ == "__main__":
+    unittest.main()
