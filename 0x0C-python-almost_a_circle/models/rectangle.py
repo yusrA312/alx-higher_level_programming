@@ -70,12 +70,13 @@ class Rectangle(Base):
     def display(self):
         """Prints representation oF THE rectangle."""
         s = "\n" * self.y + (" " * self.x + "#" * self.width + "\n") * self.height
+
         print(s, end="")
 
     def __str__(self):
         """THE info OF rectangle."""
-        return "[{}] ({}) {}/{} - {}/{}".format(
-            type(self).__name__, self.id, self.x, self.y, self.width, self.height
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.x, self.y, self.width, self.height
         )
 
     def __update(self, id=None, width=None, height=None, x=None, y=None):
