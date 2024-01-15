@@ -71,7 +71,8 @@ class Base:
 
         if list_objs is not None:
             if cls is Rectangle:
-                list_objs = [[X.id, X.width, X.height, X.x, X.y] for X in list_objs]
+                list_objs = [[X.id, X.width, X.height, X.x, X.y]
+                             for X in list_objs]
             else:
                 list_objs = [[X.id, X.size, X.x, X.y] for X in list_objs]
         with open(
