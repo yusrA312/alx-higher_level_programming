@@ -6,7 +6,7 @@ from models.square import Square
 from random import randrange
 from contextlib import redirect_stdout
 import io
-
+import os
 
 class TestSquare(unittest.TestCase):
     '''Tests Base class.'''
@@ -177,7 +177,6 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(self.square.x, 2)
         self.assertEqual(self.square.y, 3)
 
-
     def test_save_to_file_with_none(self):
         m = Square(5)
         Square.save_to_file(None)
@@ -190,11 +189,74 @@ class TestSquare(unittest.TestCase):
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
 
+
     def test_to_dictionary(self):
-        m = Square(5, 3, 2)
-        self.assertEqual(m.to_dictionary(), {'id': 31, 'size': 5, 'x': 3, 'y': 2})
+        square = Square(5, 2, 3, 1)
+        dictionary = square.to_dictionary()
+        expected_dict = {"id": 1, "size": 5, "x": 2, "y": 3}
+        self.assertEqual(dictionary, expected_dict)
 
 
+    def test_square_exists(self):
+        square = Square(1, 2, 3, 4)
+        self.assertIsInstance(square, Square)
+
+    def test_str_exists(self):
+        square = Square(1, 2, 3, 4)
+        self.assertTrue(hasattr(square, '__str__'))
+
+    def test_str_representation(self):
+        square = Square(1, 2, 3, 4)
+        self.assertEqual(str(square), '[Square] (4) 2/3 - 1')
+
+    def test_to_dictionary_exists(self):
+        square = Square(1, 2, 3, 4)
+        self.assertTrue(hasattr(square, 'to_dictionary'))
+
+
+    def setUp(self):
+        self.file_name = "Square.json"
+        self.square = Square(5, 2, 3, 1)
+
+    def tearDown(self):
+        if os.path.exists(self.file_name):
+            os.remove(self.file_name)
+
+    def test_create_with_id(self):
+        square = Square.create(**{'id': 89})
+        self.assertEqual(square.id, 89)
+
+    def test_create_with_id_size(self):
+        square = Square.create(**{'id': 89, 'size': 1})
+        self.assertEqual(square.id, 89)
+        self.assertEqual(square.size, 1)
+
+    def test_create_with_id_size_x(self):
+        square = Square.create(**{'id': 89, 'size': 1, 'x': 2})
+        self.assertEqual(square.id, 89)
+        self.assertEqual(square.size, 1)
+        self.assertEqual(square.x, 2)
+
+    def test_create_with_id_size_x_y(self):
+        square = Square.create(**{'id': 89, 'size': 1, 'x': 2, 'y': 3})
+        self.assertEqual(square.id, 89)
+        self.assertEqual(square.size, 1)
+        self.assertEqual(square.x, 2)
+        self.assertEqual(square.y, 3)
+
+
+    def test_save_to_file_with_square_instance(self):
+        Square.save_to_file([Square(1)])
+        self.assertTrue(os.path.exists(self.file_name))
+
+    def test_load_from_file_nonexistent_file(self):
+        squares = Square.load_from_file()
+        self.assertEqual(squares, [])
+
+    def test_load_from_file_existing_file(self):
+        Square.save_to_file([Square(1)])
+        squares = Square.load_from_file()
+        self.assertEqual(len(squares), 1)
 
 if __name__ == "__main__":
     unittest.main()

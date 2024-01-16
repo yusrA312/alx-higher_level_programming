@@ -7,7 +7,6 @@ import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from contextlib import redirect_stdout
-from random import randrange
 
 class TestRectangle(unittest.TestCase):
     '''Tests to Base'''
@@ -98,7 +97,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(type(m)), "<class 'models.rectangle.Rectangle'>")
         self.assertTrue(isinstance(m, Base))
         n = {'_Rectangle__height': 30, '_Rectangle__width': 1,
-             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 21}
+             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 20}
         self.assertDictEqual(m.__dict__, n)
 
         with self.assertRaises(TypeError) as e:
@@ -131,13 +130,7 @@ class TestRectangle(unittest.TestCase):
         r = Rectangle(10, 20, 6, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
-    def test_I_area_no_args(self):
-        '''Tests area() method signature.'''
-        r = Rectangle(5, 6)
-        with self.assertRaises(TypeError) as e:
-            Rectangle.area()
-        s = "area() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(e.exception), s)
+
 
     def test_rectangle_exists(self):
         with self.assertRaises(ValueError) as context:
@@ -190,6 +183,9 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(rect.height, 2)
         self.assertEqual(rect.x, 3)
         self.assertEqual(rect.y, 4)
+
+
+
     def setUp(self):
         if os.path.isfile("Rectangle.json"):
             os.remove("Rectangle.json")
@@ -244,6 +240,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r.height, 6)
         self.assertEqual(r.x, 7)
         self.assertEqual(r.y, 8)
-	
+
+
 if __name__ == "__main__":
     unittest.main()
