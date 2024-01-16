@@ -7,6 +7,7 @@ import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from contextlib import redirect_stdout
+from models.tmp_rectangle import Rectangle
 
 class TestRectangle(unittest.TestCase):
     '''Tests to Base'''
@@ -130,6 +131,11 @@ class TestRectangle(unittest.TestCase):
         r = Rectangle(10, 20, 6, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
+    def __init__(self, width, height, x=0, y=0, id=None):
+        """ Random documentation """
+        if height == 0:
+            height = 1
+        super().__init__(width, height, x, y, id)
 
 if __name__ == "__main__":
     unittest.main()
