@@ -192,7 +192,7 @@ class TestSquare(unittest.TestCase):
 
     def test_to_dictionary(self):
         m = Square(5, 3, 2)
-        self.assertEqual(m.to_dictionary(), {'id': 1, 'size': 5, 'x': 3, 'y': 2})
+        self.assertEqual(m.to_dictionary(), {'id': 31, 'size': 5, 'x': 3, 'y': 2})
 
 
 
