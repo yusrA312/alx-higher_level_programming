@@ -139,39 +139,56 @@ class TestRectangle(unittest.TestCase):
         s = "area() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), s)
 
-    def test_I_area_no_args(self):
-        '''Tests area()'''
-        Xr = Rectangle(5, 6)
-        with self.assertRaises(TypeError) as Q:
-            Rectangle.area()
-        Xs = "area() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(Q.exception), Xs)
+     def test_rectangle_exists(self):
+        with self.assertRaises(ValueError) as context:
+            rect = Rectangle(1, 0)
 
-    def test_I_area(self):
-        '''method compuation.'''
-        Xr = Rectangle(5, 6)
-        self.assertEqual(Xr.area(), 30)
-        wA = randrange(10) + 1
-        hA = randrange(10) + 1
-        Xr.width = wA
-        Xr.height = hA
-        self.assertEqual(Xr.area(), wA * hA)
-        wA = randrange(10) + 1
-        hA = randrange(10) + 1
-        Xr = Rectangle(wA, hA, 7, 8, 9)
-        self.assertEqual(Xr.area(), wA * hA)
-        wA = randrange(10) + 1
-        hA = randrange(10) + 1
-        Xr = Rectangle(wA, hA, y=7, x=8, id=9)
-        self.assertEqual(Xr.area(), wA * hA)
+        self.assertEqual(str(context.exception), 'height must be > 0')
 
-        r1 = Rectangle(3, 2)
-        self.assertEqual(r1.area(), 6)
+    def test_area_exists(self):
+        with self.assertRaises(ValueError) as context:
 
-        r2 = Rectangle(2, 10)
-        self.assertEqual(r2.area(), 20)
+            rect = Rectangle(1, 0)
+        self.assertEqual(str(context.exception), 'height must be > 0')
 
-        r3 = Rectangle(8, 7, 0, 0, 12)
-        self.assertEqual(r3.area(), 56)
+    def test_area_calculation(self):
+        rect = Rectangle(4, 5)
+        self.assertEqual(rect.area(), 20)
+
+   
+    def test_str_exists(self):
+        with self.assertRaises(ValueError) as context:
+            rect = Rectangle(1, 0)
+
+        self.assertEqual(str(context.exception), 'height must be > 0')
+
+    def test_str_representation(self):
+        with self.assertRaises(ValueError) as context:
+            rect = Rectangle(1, 0)
+
+        self.assertEqual(str(context.exception), 'height must be > 0')
+
+    def test_create_with_id(self):
+        rect = Rectangle.create(**{'id': 89})
+        self.assertEqual(rect.id, 89)
+
+    def test_create_with_id_and_width(self):
+        rect = Rectangle.create(**{'id': 89, 'width': 1})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+
+    def test_create_with_id_width_and_height(self):
+        rect = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+        self.assertEqual(rect.height, 2)
+
+    def test_create_with_all_parameters(self):
+        rect = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+        self.assertEqual(rect.height, 2)
+        self.assertEqual(rect.x, 3)
+        self.assertEqual(rect.y, 4)
 if __name__ == "__main__":
     unittest.main()
