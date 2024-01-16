@@ -139,23 +139,31 @@ class TestRectangle(unittest.TestCase):
         s = "area() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), s)
 
+    def test_I_area_no_args(self):
+        '''Tests area()'''
+        Xr = Rectangle(5, 6)
+        with self.assertRaises(TypeError) as Q:
+            Rectangle.area()
+        Xs = "area() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(Q.exception), Xs)
+
     def test_I_area(self):
-        '''Tests area() method compuation.'''
-        r = Rectangle(5, 6)
-        self.assertEqual(r.area(), 30)
-        w = randrange(10) + 1
-        h = randrange(10) + 1
-        r.width = w
-        r.height = h
-        self.assertEqual(r.area(), w * h)
-        w = randrange(10) + 1
-        h = randrange(10) + 1
-        r = Rectangle(w, h, 7, 8, 9)
-        self.assertEqual(r.area(), w * h)
-        w = randrange(10) + 1
-        h = randrange(10) + 1
-        r = Rectangle(w, h, y=7, x=8, id=9)
-        self.assertEqual(r.area(), w * h)
+        '''method compuation.'''
+        Xr = Rectangle(5, 6)
+        self.assertEqual(Xr.area(), 30)
+        wA = randrange(10) + 1
+        hA = randrange(10) + 1
+        Xr.width = wA
+        Xr.height = hA
+        self.assertEqual(Xr.area(), wA * hA)
+        wA = randrange(10) + 1
+        hA = randrange(10) + 1
+        Xr = Rectangle(wA, hA, 7, 8, 9)
+        self.assertEqual(Xr.area(), wA * hA)
+        wA = randrange(10) + 1
+        hA = randrange(10) + 1
+        Xr = Rectangle(wA, hA, y=7, x=8, id=9)
+        self.assertEqual(Xr.area(), wA * hA)
 
         r1 = Rectangle(3, 2)
         self.assertEqual(r1.area(), 6)
