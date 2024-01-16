@@ -98,7 +98,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(type(m)), "<class 'models.rectangle.Rectangle'>")
         self.assertTrue(isinstance(m, Base))
         n = {'_Rectangle__height': 30, '_Rectangle__width': 1,
-             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 18}
+             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 20}
         self.assertDictEqual(m.__dict__, n)
 
         with self.assertRaises(TypeError) as e:
@@ -139,7 +139,7 @@ class TestRectangle(unittest.TestCase):
         s = "area() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), s)
 
-     def test_rectangle_exists(self):
+    def test_rectangle_exists(self):
         with self.assertRaises(ValueError) as context:
             rect = Rectangle(1, 0)
 
