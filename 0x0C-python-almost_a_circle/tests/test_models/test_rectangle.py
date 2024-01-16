@@ -7,6 +7,7 @@ import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from contextlib import redirect_stdout
+from random import randrange
 
 class TestRectangle(unittest.TestCase):
     '''Tests to Base'''
@@ -97,7 +98,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(type(m)), "<class 'models.rectangle.Rectangle'>")
         self.assertTrue(isinstance(m, Base))
         n = {'_Rectangle__height': 30, '_Rectangle__width': 1,
-             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 14}
+             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 18}
         self.assertDictEqual(m.__dict__, n)
 
         with self.assertRaises(TypeError) as e:
@@ -130,6 +131,39 @@ class TestRectangle(unittest.TestCase):
         r = Rectangle(10, 20, 6, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
+    def test_I_area_no_args(self):
+        '''Tests area() method signature.'''
+        r = Rectangle(5, 6)
+        with self.assertRaises(TypeError) as e:
+            Rectangle.area()
+        s = "area() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), s)
 
+    def test_I_area(self):
+        '''Tests area() method compuation.'''
+        r = Rectangle(5, 6)
+        self.assertEqual(r.area(), 30)
+        w = randrange(10) + 1
+        h = randrange(10) + 1
+        r.width = w
+        r.height = h
+        self.assertEqual(r.area(), w * h)
+        w = randrange(10) + 1
+        h = randrange(10) + 1
+        r = Rectangle(w, h, 7, 8, 9)
+        self.assertEqual(r.area(), w * h)
+        w = randrange(10) + 1
+        h = randrange(10) + 1
+        r = Rectangle(w, h, y=7, x=8, id=9)
+        self.assertEqual(r.area(), w * h)
+
+        r1 = Rectangle(3, 2)
+        self.assertEqual(r1.area(), 6)
+
+        r2 = Rectangle(2, 10)
+        self.assertEqual(r2.area(), 20)
+
+        r3 = Rectangle(8, 7, 0, 0, 12)
+        self.assertEqual(r3.area(), 56)
 if __name__ == "__main__":
     unittest.main()
