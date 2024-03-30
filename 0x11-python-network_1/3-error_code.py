@@ -3,7 +3,7 @@
 handling HTTP errors
 """
 from urllib import request, error
-import sys 
+import sys
 
 
 if __name__ == "__main__":
