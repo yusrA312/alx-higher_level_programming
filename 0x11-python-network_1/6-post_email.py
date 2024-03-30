@@ -9,5 +9,5 @@ if __name__ == '__main__':
 
     Uy = argv[1]
     Ey = argv[2]
-    Ry = post(url, {'email': Ey})
+    Ry = post(Uy, {'email': Ey})
     print(Ry.text)

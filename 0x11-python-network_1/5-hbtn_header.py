@@ -3,7 +3,7 @@
 in a URL, sends a request and displays
 """
 import requests
-from sys import argv
+import sys
 
 if __name__ == "__main__":
     Xx = sys.argv[1]
