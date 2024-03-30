@@ -7,7 +7,7 @@ import sys
 
 
 if __name__ == "__main__":
-XX= sys.argv[1]
+    XX = sys.argv[1]
     try:
         with request.urlopen(XX) as ry:
             by = ry.read()

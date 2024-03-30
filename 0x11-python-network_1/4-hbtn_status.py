@@ -8,4 +8,4 @@ if __name__ == '__main__':
     
     HT = response.content
     print("Body response:")
-    print(f"\t- type: {type(HT)}\n\t- content: {html}")
+    print(f"\t- type: {type(HT)}\n\t- content: {HT}")
