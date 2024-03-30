@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-"""A python that fetches """
+"""A Python script that fetches content from a URL."""
 
 if __name__ == '__main__':
     import urllib.request
 
     with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as ryy:
-        content = ryy.read()
-        print(f"Body response:
-                        \n\t- type: {type(content)}\n
-                        \t- content: {content}\n
-                        \t- utf8 content: {content.decode('utf-8')}")
+        html = ryy.read()
+        print("Body response:")
+        print(f"\t- type: {type(html)}\n\t- content: {html}\n\t- utf8 content: {html.decode('utf-8')}")
