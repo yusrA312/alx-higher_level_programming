@@ -7,4 +7,5 @@ if __name__ == '__main__':
     with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as ryy:
         html = ryy.read()
         print("Body response:")
-        print(f"\t- type: {type(html)}\n\t- content: {html}\n\t- utf8 content: {html.decode('utf-8')}")
+        print(f"\t- type: {type(html)}\n\t- content: {html}\n\t- " +
+              f"utf8 content: {html.decode('utf-8')}")
