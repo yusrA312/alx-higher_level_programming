@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""Python script that sends a request to the URL and
-   displays the value of a variable in the response header   """
-   import sys
-   import requests
+"""script that sends a request to the URL
+"""
+from sys import argv
+import requests
 
 
-   if __name__ == "__main__":
-       url = "https://api.github.com/repos/{}/{}/commits".format(
-		               sys.argv[2], sys.argv[1])
+if __name__ == "__main__":
+    U = "https://api.github.com/repos/{}/{}/commits".format(
+        argv[2], argv[1])
 
-           r = requests.get(url)
+    hhh = requests.get(U)
