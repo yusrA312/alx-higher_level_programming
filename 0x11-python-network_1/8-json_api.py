@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 # takes in a letter
 from requests import post
-if __name__ == '__main__':
- from sys import argv
+from sys import argv
 
 
 def search_user(query):
@@ -23,6 +22,8 @@ def search_user(query):
             return 'No result'
     else:
         return 'Not a valid JSON'
+
+if __name__ == '__main__':
 
     query = argv[1] if len(argv) >= 2 else ""
     print(search_user(query))
