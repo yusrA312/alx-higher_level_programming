@@ -3,6 +3,7 @@
 
 from requests import post
 
+
 def search_user(query):
     """Sends a request to the URL and displays the body of the response."""
     URL = 'http://0.0.0.0:5000/search_user'
@@ -21,6 +22,7 @@ def search_user(query):
             return 'No result'
     else:
         return 'Not a valid JSON'
+
 
 if __name__ == '__main__':
     from sys import argv
