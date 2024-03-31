@@ -14,10 +14,10 @@ def suser(Q):
 
     if tyes == 'application/json':
         result = response.json()
-       U_id = result.get('id')
+        u_id = result.get('id')
         name = result.get('name')
-        if result and U_id and name:
-            return "[{}] {}".format(U_id, name)
+        if result and u_id and name:
+            return "[{}] {}".format(u_id, name)
         else:
             return 'No result'
     else:
