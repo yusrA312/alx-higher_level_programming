@@ -4,20 +4,20 @@
 from requests import post
 
 
-def search_user(query):
-    """Sends a request to the URL and displays the body of the response."""
-    URL = 'http://0.0.0.0:5000/search_user'
-    data = {'q': query}
-    response = post(URL, data)
+def suser(Q):
+    """Sends a req."""
+    U = 'http://0.0.0.0:5000/search_user'
+    data = {'q': Q}
+    response = post(U, data)
 
-    type_res = response.headers['content-type']
+    tyes = response.headers['content-type']
 
-    if type_res == 'application/json':
+    if tyes == 'application/json':
         result = response.json()
-        _id = result.get('id')
+       U_id = result.get('id')
         name = result.get('name')
-        if result and _id and name:
-            return "[{}] {}".format(_id, name)
+        if result and U_id and name:
+            return "[{}] {}".format(U_id, name)
         else:
             return 'No result'
     else:
@@ -27,5 +27,5 @@ def search_user(query):
 if __name__ == '__main__':
     from sys import argv
 
-    query = argv[1] if len(argv) >= 2 else ""
-    print(search_user(query))
+    Q = argv[1] if len(argv) >= 2 else ""
+    print(suser(Q))
