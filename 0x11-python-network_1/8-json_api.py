@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-# takes in a letter
-from requests import post
-from sys import argv
+"""Sends a request to the URL and displays the body of the response."""
 
 
-def search_user(query):
-    """Sends a request to the URL and displays the body of the response."""
+if __name__ == '__main__':
+    from requests import post
+    from sys import argv
+
     URL = 'http://0.0.0.0:5000/search_user'
-    data = {'q': query}
+    data = {'q': argv[1] if len(argv) >= 2 else ""}
     response = post(URL, data)
 
     type_res = response.headers['content-type']
@@ -17,13 +17,9 @@ def search_user(query):
         _id = result.get('id')
         name = result.get('name')
         if (result != {} and _id and name):
-            return "[{}] {}".format(_id, name)
+            print("[{}] {}".format(_id, name))
         else:
-            return 'No result'
+            print('No result')
     else:
-        return 'Not a valid JSON'
+        print('Not a valid JSON')
 
-if __name__ == '__main__':
-
-    query = argv[1] if len(argv) >= 2 else ""
-    print(search_user(query))
