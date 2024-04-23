@@ -9,4 +9,5 @@ request.get(url, function (error, response) {
   } else {
     process.stdout.write('code: ' + response.statusCode);
   }
+  console.log(); // Print an empty line
 });
